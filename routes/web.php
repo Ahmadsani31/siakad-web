@@ -5,6 +5,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
+// Route::get('/forgot-password', function () {
+//     return view('auth.forgot-password');
+// })->name('forgot-password');
+
 // Route::get('/', function () {
 //     // return view('welcome');
 
