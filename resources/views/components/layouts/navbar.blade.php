@@ -35,8 +35,17 @@
                                 <i class="ti ti-list-check fs-6"></i>
                                 <p class="mb-0 fs-3">My Task</p>
                             </a>
-                            <a href="./authentication-login.html"
-                                class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                            <a class="btn btn-outline-primary mx-3 mt-2 d-block" href="#"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="me-2 icon-xxs dropdown-item-icon">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                </i>
+                                Sign
+                                Out
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                @csrf
+                            </form>
                         </div>
                     </div>
                 </li>

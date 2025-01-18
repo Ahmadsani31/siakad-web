@@ -3,7 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/home', [DashboardController::class, 'index'])->name('dashboard');
 
 // Route::get('/forgot-password', function () {
 //     return view('auth.forgot-password');

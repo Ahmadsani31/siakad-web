@@ -4,25 +4,32 @@
         <div class="col-md-8 col-lg-6 col-xxl-3">
             <div class="card mb-0">
                 <div class="card-body">
-                    <h2 class="text-center mb-3">Sign-In</h2>
-                    <form method="POST" action="{{ route('login') }}">
+                    <h2 class="text-center mb-3">Update Your Password</h2>
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+                    <form method="POST" action="{{ route('password.update') }}">
                         @csrf
+                        <input type="hidden" name="token" value="{{ $request->route('token') }}">
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
+                            <label for="email" class="form-label">Email Address</label>
                             <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
-                                id="email" aria-describedby="validationEmail">
+                                id="email" value="{{ $request->email ?? old('email') }}"
+                                aria-describedby="validationEmail" readonly>
                             @error('email')
                                 <div id="validationEmail" class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                             @enderror
                         </div>
-                        <div class="mb-4">
+                        <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
                             <div class="input-group mb-3">
                                 <input type="password" name="password"
                                     class="form-control @error('password') is-invalid @enderror" id="password"
-                                    aria-describedby="validationPassword" value="{{ $request->email ?? old('email') }}">
+                                    aria-describedby="validationPassword">
                                 <span class="input-group-text" id="togglePassword">
                                     <i class="fa-solid fa-eye-slash" id="toggleIcon"></i>
                                 </span>
@@ -33,21 +40,19 @@
                                 </div>
                             @enderror
                         </div>
-                        <div class="d-flex align-items-center justify-content-between mb-4">
-                            <div class="form-check">
-                                <input class="form-check-input primary" type="checkbox" value=""
-                                    id="flexCheckChecked">
-                                <label class="form-check-label text-dark" for="flexCheckChecked">
-                                    Remeber this Device
-                                </label>
+                        <div class="mb-3">
+                            <label for="password-conf" class="form-label">Comfirm Password</label>
+                            <div class="input-group mb-3">
+                                <input type="password" name="password_confirmation" class="form-control" id="password-conf"
+                                    aria-describedby="validationPassword">
+                                <span class="input-group-text" id="togglePasswordConf">
+                                    <i class="fa-solid fa-eye-slash" id="toggleIconConf"></i>
+                                </span>
                             </div>
-                            <a class="text-primary fw-bold" href="{{ route('password.request') }}">Forgot Password ?</a>
                         </div>
-                        <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign In</button>
-                        <div class="d-flex align-items-center justify-content-center">
-                            <a class="text-primary fw-bold ms-2" href="{{ route('register') }}">Create an account</a>
-                        </div>
+                        <button type="submit" class="btn btn-sm btn-primary w-100 fs-4 mb-4 rounded-2">Update</button>
                     </form>
+
                 </div>
             </div>
         </div>
@@ -68,6 +73,20 @@
                 $('#toggleIcon').addClass('fa-solid fa-eye-slash');
             }
 
+        });
+
+        document.getElementById('togglePasswordConf').addEventListener('click', function() {
+            const passwordFieldConf = document.getElementById('password-conf');
+
+            if (passwordFieldConf.type === 'password') {
+                passwordFieldConf.type = 'text';
+                $('#toggleIconConf').removeClass('fa-solid fa-eye-slash');
+                $('#toggleIconConf').addClass('fa-solid fa-eye');
+            } else {
+                passwordFieldConf.type = 'password';
+                $('#toggleIconConf').removeClass('fa-solid fa-eye');
+                $('#toggleIconConf').addClass('fa-solid fa-eye-slash');
+            }
         });
     </script>
 @endPushOnce
