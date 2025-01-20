@@ -1,7 +1,10 @@
 @extends('layouts.guest')
+
+@section('title', 'Login')
+
 @section('content')
     <div class="row justify-content-center w-100">
-        <div class="col-md-8 col-lg-6 col-xxl-3">
+        <div class="col-12 col-sm-8 col-md-6  col-lg-6  col-xl-4">
             <div class="card mb-0">
                 <div class="card-body">
                     <h2 class="text-center mb-3">Sign-In</h2>

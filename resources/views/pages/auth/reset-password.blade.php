@@ -1,4 +1,8 @@
 @extends('layouts.guest')
+
+@section('title', 'Reset Password')
+
+
 @section('content')
     <div class="row justify-content-center w-100">
         <div class="col-md-8 col-lg-6 col-xxl-3">

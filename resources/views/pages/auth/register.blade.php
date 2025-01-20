@@ -1,4 +1,7 @@
 @extends('layouts.guest')
+
+@section('title', 'Register')
+
 @section('content')
     <div class="row justify-content-center w-100">
         <div class="col-md-8 col-lg-6 col-xxl-3">

@@ -1,13 +1,22 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/home', [DashboardController::class, 'index'])->name('dashboard');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/home', [DashboardController::class, 'index'])->name('dashboard');
+});
 
-// Route::get('/forgot-password', function () {
-//     return view('auth.forgot-password');
-// })->name('forgot-password');
+Route::get('/register-retry', function () {
+    // Chrome F12 Headers - my_first_application_session=eyJpdiI6ImNnRH...
+    Cookie::queue(Cookie::forget(strtolower(str_replace(' ', '_', config('app.name'))) . '_session'));
+    return redirect('/register');
+});
+
+Route::get('/', function () {
+    return view('pages.auth.login');
+})->middleware('guest');
 
 // Route::get('/', function () {
 //     // return view('welcome');
