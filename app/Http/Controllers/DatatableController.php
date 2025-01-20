@@ -21,13 +21,21 @@ class DatatableController extends Controller
                         ->addColumn('created_at', function ($row) {
                             return Carbon::create($row->created_at)->format('d F Y');
                         })
+                        ->addColumn('status', function ($row) {
+                            if ($row->status == 'Y') {
+                                $output = ' <span class="badge bg-primary">Aktif</span>';
+                            } else {
+                                $output = '<span class="badge bg-danger">Non Aktif</span>';
+                            }
+                            return $output;
+                        })
                         ->addColumn('action', function ($row) {
                             $btn = '<button type="button" class="btn p-1 modal-cre text-warning" id="user-edit-password" parent="' . $row->id . '" judul="Edit Password"><iconify-icon icon="solar:lock-password-bold" width="28" height="28"></iconify-icon></button>';
                             $btn .= '<button type="button" class="btn p-1 modal-cre text-success" id="user-edit" parent="' . $row->id . '" judul="Edit User"><iconify-icon icon="solar:user-plus-bold" width="28" height="28"></iconify-icon></button>';
                             $btn .= '<button type="button" class="btn p-1 text-danger" onclick="logOutUser(' . $row->id . ')"><iconify-icon icon="solar:user-cross-rounded-bold-duotone" width="28" height="28"></iconify-icon></button>';
                             return $btn;
                         })
-                        ->rawColumns(['action'])
+                        ->rawColumns(['status', 'action'])
                         ->toJson();
                     break;
                     break;

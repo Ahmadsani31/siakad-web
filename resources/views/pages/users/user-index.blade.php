@@ -31,6 +31,7 @@
                             <th>Nama</th>
                             <th>Email</th>
                             <th>Role</th>
+                            <th>Address</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -151,7 +152,9 @@
             }, {
                 data: 'roles',
             }, {
-                data: 'roles',
+                data: 'address',
+            }, {
+                data: 'status',
             }, {
                 data: 'action',
             }, ],

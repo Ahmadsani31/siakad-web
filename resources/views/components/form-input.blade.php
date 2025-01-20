@@ -5,6 +5,7 @@
         @endif
     </label>
     <input type="{{ $type }}" class="form-control" id="{{ $name }}" name="{{ $name }}"
-        value="{{ old($name, $value) }}" placeholder="{{ $placeholder }}" {{ $required ? 'required' : '' }} />
+        value="{{ old($name, $value) }}" placeholder="{{ $placeholder }}" {{ $required ? 'required' : '' }}
+        {{ $readonly ? 'readonly' : '' }} />
     <div class="invalid-feedback" id="error-{{ $name }}"></div>
 </div>

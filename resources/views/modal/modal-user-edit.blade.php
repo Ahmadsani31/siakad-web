@@ -4,36 +4,45 @@
     if ($user) {
         $name = $user->name;
         $email = $user->email;
-        $level = $user->level;
-        $aktif = $user->aktif;
+        $roles = $user->roles;
+        $status = $user->status;
+        $phone = $user->phone;
+        $address = $user->address;
     }
+    $rolesArr = [
+        'admin' => 'Admin',
+        'dosen' => 'Dosen',
+        'mahasiswa' => 'Mahasiswa',
+    ];
+
+    $statusArr = [
+        'Y' => 'Aktif',
+        'N' => 'Non Aktif',
+    ];
 
 @endphp
-<form action="{{ route('user.store') }}" onsubmit="return false" method="post" id="form-action">
+<form action="{{ route('user.update') }}" onsubmit="return false" method="post" id="form-action">
     <input type="hidden" name="ID" value="{{ request()->parent }}">
     @csrf
     <div class="modal-body">
-        <div class="mb-3">
-            <x-input-label for="name" :value="__('Nama')" />
-            <x-input id="name" type="text" name="name" :value="$name" autofocus
-                placeholder="Tulis nama" />
+        <x-form-input label="Nama" type="text" name="name" :value="$name" autofocus placeholder="Tulis nama"
+            required />
+        <x-form-input label="Email" type="email" name="email" :value="$email" placeholder="Tulis email"
+            readonly />
+        <x-form-input label="Nomor Telphone" type="text" name="phone" :value="$phone"
+            placeholder="Tulis nomor telepon" required />
+        <div class="row">
+            <div class="col-md-6">
+                <x-form-select label="Roles" class="select-2" name="roles" :options="$rolesArr" :selected="$roles"
+                    placeholder="Pilih Roles" :required="true" />
+            </div>
+            <div class="col-md-6">
+                <x-form-select label="Status" class="select-2" name="status" :options="$statusArr" :selected="$status"
+                    placeholder="Pilih Status" :required="true" />
+            </div>
         </div>
-        <div class="mb-3">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-input id="email" type="email" name="email" :value="$email" placeholder="Tulis email" />
-        </div>
-        <div class="mb-3">
-            <x-input-label for="level" :value="__('Level')" />
-            <select class="form-control select-2" name="level" id="level">
-                {!! OptionCreate([1, 2], ['Admin', 'Operator'], $level) !!}
-            </select>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Status</label>
-            <select class="form-control select-2" name="aktif" id="aktif">
-                {!! OptionCreate(['Y', 'N'], ['Aktif', 'Non Aktif'], $aktif) !!}
-            </select>
-        </div>
+        <x-form-textarea label="Alamat" name="address" :value="$address" placeholder="Tulis alamat" required />
+
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -41,19 +50,18 @@
     </div>
 </form>
 <script>
+    $(document).ready(function() {
+        $('.select-2').select2({
+            dropdownParent: $("#myModals")
+        });
+    });
     $("form#form-action").on("submit", function(event) {
         event.preventDefault();
         $('#page-pre-loader').show();
         const form = this;
-        let settings = {
-            headers: {
-                'content-type': 'multipart/form-data'
-            }
-        };
-        axios.post($(form).attr('action'), form, settings)
+
+        axios.post($(form).attr('action'), form)
             .then(response => {
-                $('#page-pre-loader').hide();
-                DTable.ajax.reload(null, false);
                 if (response.data.param == true) {
                     $('#myModals').modal('hide');
                     Toast.fire({
@@ -69,15 +77,17 @@
                 }
                 console.log(response)
             }).catch(error => {
-                $('#page-pre-loader').hide();
-                DTable.ajax.reload(null, false);
 
+                $('input').removeClass('is-invalid');
+                $('textarea').removeClass('is-invalid');
+                $('select').removeClass('is-invalid');
                 if (error.response.status == 422) {
                     let msg = error.response.data.errors;
                     $.each(msg, function(key, value) {
                         console.log(key);
                         console.log(value);
 
+                        $('#error-' + key).html(value[0]);
                         $('#' + key).addClass('is-invalid');
                     });
 
@@ -97,6 +107,9 @@
                 }
 
                 console.log(error.response.data.message)
-            })
+            }).finally(function() {
+                $('#page-pre-loader').hide();
+                DTable.ajax.reload(null, false);
+            });
     });
 </script>

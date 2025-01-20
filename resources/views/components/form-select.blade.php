@@ -4,8 +4,8 @@
             <span class="text-danger">*</span>
         @endif
     </label>
-    <select {{ $attributes->merge(['class' => 'form-select']) }}class="form-select" id="{{ $name }}"
-        name="{{ $name }}" {{ $required ? 'required' : '' }}>
+    <select {{ $attributes->merge(['class' => 'form-select']) }} id="{{ $name }}" name="{{ $name }}"
+        {{ $required ? 'required' : '' }}>
         <option value="" {{ old($name, $selected) === null ? 'selected' : '' }}>
             {{ $placeholder }}
         </option>

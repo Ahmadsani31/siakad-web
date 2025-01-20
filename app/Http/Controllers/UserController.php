@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdatePasswordRequest;
+use App\Http\Requests\UserPasswordUpdateRequest;
 use App\Http\Requests\UserRequest;
+use App\Http\Requests\UserStoreRequest;
+use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -21,7 +24,7 @@ class UserController extends Controller
     }
 
 
-    public function store(UserRequest $request)
+    public function store(UserStoreRequest $request)
     {
         try {
             User::create($request->validated());
@@ -31,7 +34,20 @@ class UserController extends Controller
         }
     }
 
-    public function updatePassword(UpdatePasswordRequest $request)
+    public function update(UserUpdateRequest $request)
+    {
+        try {
+            $user =  User::findOrFail($request->ID);
+
+            $user->update($request->validated());
+
+            return response()->json(['param' => true, 'message' => 'Successfully']);
+        } catch (\Exception $err) {
+            return response()->json(['param' => false, 'message' => $err->getMessage()]);
+        }
+    }
+
+    public function updatePassword(UserPasswordUpdateRequest $request)
     {
         try {
             $user =   User::findOrFail($request->ID);

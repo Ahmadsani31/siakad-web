@@ -17,6 +17,7 @@ class FormInput extends Component
     public $value;
     public $placeholder;
     public $required;
+    public $readonly;
 
     public function __construct(
         $label,
@@ -24,7 +25,8 @@ class FormInput extends Component
         $value = '',
         $type = 'text',
         $placeholder = '',
-        $required = false
+        $required = false,
+        $readonly = false
     ) {
         $this->label = $label;
         $this->name = $name;
@@ -32,12 +34,13 @@ class FormInput extends Component
         $this->type = $type;
         $this->placeholder = $placeholder;
         $this->required = $required;
+        $this->readonly = $readonly;
     }
 
     /**
      * Get the view / contents that represent the component.
      */
-    public function render(): View|Closure|string
+    public function render()
     {
         return view('components.form-input');
     }

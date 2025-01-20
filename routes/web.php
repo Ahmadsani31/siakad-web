@@ -16,6 +16,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('user')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('user');
         Route::post('/store', [UserController::class, 'store'])->name('user.store');
+        Route::post('/update', [UserController::class, 'update'])->name('user.update');
         Route::post('/password', [UserController::class, 'updatePassword'])->name('user.password');
         Route::get('/logout-all', [UserController::class, 'logoutAllUsers'])->name('user.logout-all');
         Route::get('/logout/{id}', [UserController::class, 'logoutUser'])->name('user.logout');

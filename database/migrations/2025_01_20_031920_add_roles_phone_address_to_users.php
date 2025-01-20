@@ -15,6 +15,7 @@ return new class extends Migration
             $table->enum('roles', ['admin', 'dosen', 'mahasiswa'])->after('email')->default('mahasiswa');
             $table->string('phone')->after('roles')->nullable();
             $table->string('address')->after('phone')->nullable();
+            $table->enum('status', ['Y', 'N'])->after('remember_token')->nullable();
         });
     }
 
@@ -27,6 +28,7 @@ return new class extends Migration
             $table->dropColumn('roles');
             $table->dropColumn('phone');
             $table->dropColumn('address');
+            $table->dropColumn('status');
         });
     }
 };

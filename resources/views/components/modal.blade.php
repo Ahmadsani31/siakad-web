@@ -8,6 +8,7 @@
 
                 </button>
             </div>
+            <hr class="m-0" />
             <div id="contentBody"> </div>
         </div>
     </div>

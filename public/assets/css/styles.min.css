@@ -3016,10 +3016,10 @@ progress {
     font-size: 0.875rem;
     font-weight: 500;
     line-height: 1.5;
-    color: #5a6a85;
-    background-color: transparent;
+    color: #000;
+    background-color: #ffffff;
     background-clip: padding-box;
-    border: var(--bs-border-width) solid #dfe5ef;
+    border: var(--bs-border-width) solid #006494;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;

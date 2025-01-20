@@ -1,32 +1,38 @@
+@php
+
+    $rolesArr = [
+        'admin' => 'Admin',
+        'dosen' => 'Dosen',
+        'mahasiswa' => 'Mahasiswa',
+    ];
+
+    $statusArr = [
+        'Y' => 'Aktif',
+        'N' => 'Non Aktif',
+    ];
+
+@endphp
 <form action="{{ route('user.store') }}" onsubmit="return false" method="post" id="form-action">
-    <input type="hidden" name="ID" value="{{ request()->parent }}">
     @csrf
+    <input type="hidden" name="ID" value="{{ request()->parent }}">
     <div class="modal-body">
-        <div class="mb-3">
-            <x-input-label for="name" :value="__('Nama')" />
-            <x-input id="name" type="text" name="name" :value="old('nama')" autofocus
-                placeholder="Tulis nama" />
+        <x-form-input label="Email" type="email" name="email" placeholder="Tulis email" required />
+        <x-form-input label="Password" type="password" name="password" placeholder="Tulis password" required />
+        <hr />
+        <x-form-input label="Nama" type="text" name="name" autofocus placeholder="Tulis nama" required />
+        <x-form-input label="Nomor Telphone" type="text" name="phone" placeholder="Tulis nomor telepon" required />
+        <x-form-textarea label="Alamat" name="address" placeholder="Tulis alamat" required />
+        <div class="row">
+            <div class="col-md-6">
+                <x-form-select label="Roles" class="select-2" name="roles" :options="$rolesArr"
+                    placeholder="Pilih Roles" :required="true" />
+            </div>
+            <div class="col-md-6">
+                <x-form-select label="Status" class="select-2" name="status" :options="$statusArr"
+                    placeholder="Pilih Status" :required="true" />
+            </div>
         </div>
-        <div class="mb-3">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-input id="email" type="email" name="email" :value="old('email')" placeholder="Tulis email" />
-        </div>
-        <div class="mb-3">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-input id="password" type="password" name="password" :value="old('password')" placeholder="Tulis password" />
-        </div>
-        <div class="mb-3">
-            <x-input-label for="level" :value="__('Level')" />
-            <select class="form-control select-2" name="level" id="level">
-                {!! OptionCreate([1, 2], ['Admin', 'Operator'], '') !!}
-            </select>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Status</label>
-            <select class="form-control select-2" name="aktif" id="aktif">
-                {!! OptionCreate(['Y', 'N'], ['Aktif', 'Non Aktif'], '') !!}
-            </select>
-        </div>
+
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -34,6 +40,11 @@
     </div>
 </form>
 <script>
+    $(document).ready(function() {
+        $('.select-2').select2({
+            dropdownParent: $("#myModals")
+        });
+    });
     $("form#form-action").on("submit", function(event) {
         event.preventDefault();
         $('#page-pre-loader').show();
@@ -63,14 +74,17 @@
                 console.log(response)
             }).catch(error => {
                 $('#page-pre-loader').hide();
-                DTable.ajax.reload(null, false);
 
+                $('input').removeClass('is-invalid');
+                $('textarea').removeClass('is-invalid');
+                $('select').removeClass('is-invalid');
                 if (error.response.status == 422) {
                     let msg = error.response.data.errors;
                     $.each(msg, function(key, value) {
                         console.log(key);
                         console.log(value);
 
+                        $('#error-' + key).html(value[0]);
                         $('#' + key).addClass('is-invalid');
                     });
 
@@ -90,6 +104,8 @@
                 }
 
                 console.log(error.response.data.message)
-            })
+            }).finally(function() {
+                DTable.ajax.reload(null, false);
+            });
     });
 </script>
