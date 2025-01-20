@@ -1,11 +1,32 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DatatableController;
+use App\Http\Controllers\UserController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/home', [DashboardController::class, 'index'])->name('dashboard');
+
+
+    Route::resource('user', UserController::class);
+
+    Route::prefix('user')->group(function () {
+        Route::get('/', [UserController::class, 'index'])->name('user');
+        Route::post('/store', [UserController::class, 'store'])->name('user.store');
+        Route::post('/password', [UserController::class, 'updatePassword'])->name('user.password');
+        Route::get('/logout-all', [UserController::class, 'logoutAllUsers'])->name('user.logout-all');
+        Route::get('/logout/{id}', [UserController::class, 'logoutUser'])->name('user.logout');
+    });
+
+    Route::get('/datatable/{table}', [DatatableController::class, 'index'])->name('datatable');
+
+    Route::post('/modal/{name}', function (Request $request) {
+        $segment = $request->segment(2);
+        return view('modal/' . $segment);
+    });
 });
 
 Route::get('/register-retry', function () {

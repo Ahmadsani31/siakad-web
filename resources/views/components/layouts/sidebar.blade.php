@@ -20,7 +20,7 @@
                     <span class="hide-menu">Home</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="#" aria-expanded="false">
+                    <a class="sidebar-link" href="{{ route('dashboard') }}" aria-expanded="false">
                         <iconify-icon icon="solar:widget-add-line-duotone"></iconify-icon>
                         <span class="hide-menu">Dashboard</span>
                     </a>
@@ -30,12 +30,12 @@
                 </li>
                 <li class="nav-small-cap">
                     <iconify-icon icon="solar:menu-dots-linear" class="nav-small-cap-icon fs-4"></iconify-icon>
-                    <span class="hide-menu">UI COMPONENTS</span>
+                    <span class="hide-menu">Master</span>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="./ui-buttons.html" aria-expanded="false">
-                        <iconify-icon icon="solar:layers-minimalistic-bold-duotone"></iconify-icon>
-                        <span class="hide-menu">Buttons</span>
+                    <a class="sidebar-link" href="{{ route('user') }}" aria-expanded="false">
+                        <iconify-icon icon="solar:user-bold"></iconify-icon>
+                        <span class="hide-menu">User</span>
                     </a>
                 </li>
                 <li class="sidebar-item">

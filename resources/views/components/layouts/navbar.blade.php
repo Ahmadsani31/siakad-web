@@ -18,8 +18,12 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link " href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        <img src="{{ asset('assets') }}/images/profile/user-1.jpg" alt="" width="35"
-                            height="35" class="rounded-circle">
+                        <div class="d-flex align-items-center">
+                            <h5 class="me-2">{{ auth()->user()->name }}</h5>
+
+                            <img src="{{ asset('assets') }}/images/profile/user-1.jpg" alt="" width="35"
+                                height="35" class="rounded-circle">
+                        </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                         <div class="message-body">

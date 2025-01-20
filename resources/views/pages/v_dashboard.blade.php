@@ -1,4 +1,7 @@
 @extends('layouts.app')
+
+@section('title', 'Dashboard')
+
 @section('content')
     <div class="container-fluid">
         <!--  Row 1 -->
@@ -613,6 +616,8 @@
     </div>
 @endsection
 @pushOnce('scripts')
+    <script src="{{ asset('assets') }}/js/dashboard.js"></script>
+
     <script>
         // document.addEventListener('click', function(event) {
         //     const sidebar = document.getElementsByClassName(
