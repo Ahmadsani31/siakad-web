@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Jadwal extends Model
 {
@@ -23,22 +26,27 @@ class Jadwal extends Model
 
     public function dosen()
     {
-        return $this->belongsTo(User::class, 'dosen_id');
+        return $this->hasOne(User::class, 'id', 'dosen_id');
     }
 
-    public function mata_kuliah()
+    // public function mata_kuliah()
+    // {
+    //     return $this->belongsTo(MataKuliah::class, 'mata_kuliah_id');
+    // }
+
+    public function mata_kuliah(): HasOne
     {
-        return $this->belongsTo(MataKuliah::class, 'mata_kuliah_id');
+        return $this->hasOne(MataKuliah::class, 'id', 'mata_kuliah_id');
     }
 
     public function program_studi()
     {
-        return $this->belongsTo(ProgramStudi::class, 'program_studi_id');
+        return $this->hasOne(ProgramStudi::class, 'id', 'program_studi_id');
     }
 
     public function tahun_akademik()
     {
-        return $this->belongsTo(TahunAkademik::class, 'tahun_akademik_id');
+        return $this->hasOne(TahunAkademik::class, 'id', 'tahun_akademik_id');
     }
 
     protected function casts(): array

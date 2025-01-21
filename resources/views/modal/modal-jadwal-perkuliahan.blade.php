@@ -7,7 +7,7 @@
     $program_studi_id = '';
     $tahun_akademik = '';
     $mata_kuliah = '';
-    $tanggal = '';
+    $hari = '';
     $jam_mulai = '';
     $jam_selesai = '';
     $type = '';
@@ -17,7 +17,7 @@
         $program_studi_id = $query->program_studi_id;
         $tahun_akademik = $query->tahun_akademik_id;
         $mata_kuliah = $query->mata_kuliah_id;
-        $tanggal = $query->tanggal;
+        $hari = $query->hari;
         $jam_mulai = $query->jam_mulai;
         $jam_selesai = $query->jam_selesai;
         $type = $query->type;
@@ -58,7 +58,7 @@
         <x-form-select label="Dosen pegampun" class="select-2" name="dosen_id" :options="$dosenArr" :selected="$dosen_id"
             placeholder="Pilih Dosen" :required="true" />
         <x-form-select label="Hari" class="select-2" name="hari" :options="daysOptions()" placeholder="Pilih Hari"
-            :required="true" />
+            :selected="$hari" :required="true" />
         <div class="row">
             <div class="col-md-6">
                 <x-form-input label="Jam Mulai" type="time" name="jam_mulai" :value="$jam_mulai" required />

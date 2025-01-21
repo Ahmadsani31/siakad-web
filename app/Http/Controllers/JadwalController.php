@@ -14,11 +14,6 @@ class JadwalController extends Controller
     public function index()
     {
 
-        // $jadwal = Jadwal::all();
-        // foreach ($jadwal as $key => $value) {
-        //     dd($value->program_studi->name);
-        // }
-
         $pageTitle = 'Jadwal Perkuliahan';
         return view('pages.jadwal.jadwal-index', compact('pageTitle'));
     }

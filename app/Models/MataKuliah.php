@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class MataKuliah extends Model
 {
@@ -21,9 +23,9 @@ class MataKuliah extends Model
     public $timestamps = true;
 
 
-    public function program_studi(): BelongsTo
+    public function program_studi(): HasOne
     {
-        return $this->belongsTo(ProgramStudi::class, 'program_studi_id');
+        return $this->hasOne(ProgramStudi::class, 'id', 'program_studi_id');
     }
 
     protected function casts(): array

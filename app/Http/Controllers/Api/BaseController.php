@@ -16,9 +16,12 @@ class BaseController extends Controller
     {
         $response = [
             'param' => true,
-            'data'    => $result,
             'message' => $message,
         ];
+
+        if (!empty($result)) {
+            $response['data'] = $result;
+        }
 
         return response()->json($response, 200);
     }
