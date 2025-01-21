@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('code');
             $table->string('name');
-            $table->string('tahun_mulai');
-            $table->string('tahun_selesai');
+            $table->date('tahun_mulai');
+            $table->date('tahun_selesai');
             $table->timestamps();
         });
     }

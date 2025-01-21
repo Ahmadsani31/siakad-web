@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MataKuliah;
 use App\Models\ProgramStudi;
+use App\Models\TahunAkademik;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -68,6 +69,24 @@ class DatatableController extends Controller
                         ->addColumn('action', function ($row) {
                             $btn = '<button type="button" class="btn p-1 modal-cre text-success" id="mata-kuliah" parent="' . $row->id . '" judul="Edit Mata Kuliah"><iconify-icon icon="solar:pen-new-round-bold" width="28" height="28"></iconify-icon></button>';
                             $btn .= '<button type="button" class="btn p-1 modal-del text-danger" tabel="mata-kuliah" id="' . $row->id . '"><iconify-icon icon="solar:trash-bin-minimalistic-bold" width="28" height="28"></iconify-icon></button>';
+                            return $btn;
+                        })
+                        ->rawColumns(['action'])
+                        ->toJson();
+                    break;
+                case 'tahun-akademik':
+                    $data = TahunAkademik::select('*')->orderBy('code', 'desc');
+                    return DataTables::of($data)
+                        ->addIndexColumn()
+                        ->editColumn('tahun_mulai', function ($row) {
+                            return Carbon::create($row->tahun_mulai)->format('d F Y');
+                        })
+                        ->editColumn('tahun_selesai', function ($row) {
+                            return Carbon::create($row->tahun_selesai)->format('d F Y');
+                        })
+                        ->addColumn('action', function ($row) {
+                            $btn = '<button type="button" class="btn p-1 modal-cre text-success" id="tahun-akademik" parent="' . $row->id . '" judul="Edit Tahun Akademik"><iconify-icon icon="solar:pen-new-round-bold" width="28" height="28"></iconify-icon></button>';
+                            $btn .= '<button type="button" class="btn p-1 modal-del text-danger" tabel="tahun-akademik" id="' . $row->id . '"><iconify-icon icon="solar:trash-bin-minimalistic-bold" width="28" height="28"></iconify-icon></button>';
                             return $btn;
                         })
                         ->rawColumns(['action'])

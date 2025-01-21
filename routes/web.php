@@ -5,6 +5,7 @@ use App\Http\Controllers\DatatableController;
 use App\Http\Controllers\DeleteController;
 use App\Http\Controllers\MataKuliahController;
 use App\Http\Controllers\ProgramStudiController;
+use App\Http\Controllers\TahunAkademikController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
@@ -29,6 +30,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('mata-kuliah', MataKuliahController::class);
 
     Route::resource('program-studi', ProgramStudiController::class);
+
+    Route::resource('tahun-akademik', TahunAkademikController::class);
 
 
 

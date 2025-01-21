@@ -51,7 +51,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="./ui-forms.html" aria-expanded="false">
+                    <a class="sidebar-link" href="{{ route('tahun-akademik.index') }}" aria-expanded="false">
                         <iconify-icon icon="solar:file-text-line-duotone"></iconify-icon>
                         <span class="hide-menu">Tahun Akademik</span>
                     </a>

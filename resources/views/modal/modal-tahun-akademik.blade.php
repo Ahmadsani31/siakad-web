@@ -1,46 +1,30 @@
 @php
-
-    $nama = '';
-    $satuan = '';
-    $kapasitas = '';
-    $owner = '';
-    $stock = '';
-    $keterangan = '';
-    $potongan = \App\Models\Tabung::find(request()->parent);
-    if ($potongan) {
-        $nama = $potongan->nama;
-        $satuan = $potongan->satuan;
-        $kapasitas = $potongan->kapasitas;
-        $stock = $potongan->stock;
-        $owner = $potongan->owner;
-        $keterangan = $potongan->keterangan;
+    $code = '';
+    $name = '';
+    $tahun_mulai = '';
+    $tahun_selesai = '';
+    $sql = \App\Models\TahunAkademik::find(request()->parent);
+    if ($sql) {
+        $code = $sql->code;
+        $name = $sql->name;
+        $tahun_mulai = $sql->tahun_mulai;
+        $tahun_selesai = $sql->tahun_selesai;
     }
 
 @endphp
-<form action="{{ route('tabung.store') }}" onsubmit="return false" method="post" id="form-action">
+<form action="{{ route('tahun-akademik.store') }}" onsubmit="return false" method="post" id="form-action">
     @csrf
     <input type="hidden" name="ID" value="{{ request()->parent }}">
     <div class="modal-body">
-        <x-form-input label="Nama" type="text" name="nama" placeholder="Tulis nama tabung" :value="$nama" />
+        <x-form-input label="Kode" type="number" name="code" placeholder="Tulis kode" :value="$code" />
+        <x-form-input label="Nama" type="text" name="name" placeholder="Tulis nama" :value="$name" />
         <div class="row">
             <div class="col-md-6">
-                <x-form-input-group label="Kapasitas" name="kapasitas" type="number" append="KG"
-                    placeholder="kapasitas tabung" :value="$kapasitas" />
+                <x-form-input label="Mulai" type="date" name="tahun_mulai" :value="$tahun_mulai" />
             </div>
             <div class="col-md-6">
-                <x-form-select label="Jenis Tabung" name="satuan" :options="['Kilo' => 'Kilo Gram (KG)', 'Kubik' => 'Meter Kubi (M3)', 'Liter' => 'Liter']" :selected="$satuan"
-                    placeholder="Pilih Jenis tabung" :required="true" />
+                <x-form-input label="Selesai" type="date" name="tahun_selesai" :value="$tahun_selesai" />
             </div>
-
-        </div>
-        <x-form-input label="Jumlah" type="text" name="stock" placeholder="Jumlah tabung" :value="$stock" />
-        <x-form-textarea label="Keterangan" name="keterangan" placeholder="-opsional" :value="$keterangan"
-            rows="5" />
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="owner" id="flexCheckChecked">
-            <label class="form-check-label" for="flexCheckChecked">
-                Checked untuk milik perusahaan
-            </label>
         </div>
     </div>
     <div class="modal-footer">
@@ -49,10 +33,6 @@
     </div>
 </form>
 <script>
-    $('.select-2').select2({
-        dropdownParent: $("#myModals")
-    });
-
     $("form#form-action").on("submit", function(event) {
         event.preventDefault();
         $('#page-pre-loader').show();
