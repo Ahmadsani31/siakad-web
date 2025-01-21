@@ -94,13 +94,9 @@ $(document).on("click", ".modal-image-cre", function (e) {
 });
 
 $(document).on("click", ".modal-del", function (e) {
-    var serial = "";
     var tbData = "";
     var idData = "";
     $.each(this.attributes, function () {
-        // if (this.specified) {
-        //     serial += "&" + this.name + "=" + this.value;
-        // }
         if (this.specified) {
             if (this.name == "tabel") {
                 tbData = this.value;
@@ -123,34 +119,24 @@ $(document).on("click", ".modal-del", function (e) {
         if (result.isConfirmed) {
             var base_url = $('meta[name="base-url"]').attr("content");
             var page = base_url + "/delete/" + tbData + "/" + idData;
-            // console.log(page);
             $("#page-pre-loader").show();
-            $.ajax({
-                url: page,
-                method: "delete",
-            })
-                .done((data, textStatus) => {
+            axios
+                .delete(page)
+                .then((response) => {
                     DTable.ajax.reload();
                     $("#page-pre-loader").hide();
-                    if (data.param == true) {
-                        Toast.fire({
-                            icon: textStatus,
-                            title: data.message,
-                        });
-                    } else {
-                        Toast.fire({
-                            icon: textStatus,
-                            title: data.message,
-                        });
-                    }
+                    Toast.fire({
+                        icon: "success",
+                        title: response.data.message,
+                    });
                 })
-                .fail(function (jqXHR, textStatus, errorThrown) {
+                .catch((error) => {
                     DTable.ajax.reload();
                     $("#page-pre-loader").hide();
                     Swal.fire({
-                        icon: textStatus,
+                        icon: "error",
                         title: "Kesalahan !",
-                        text: jqXHR.responseJSON.message,
+                        text: error.response.data.message,
                     });
                 });
         }

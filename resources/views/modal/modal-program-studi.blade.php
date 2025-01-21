@@ -1,20 +1,19 @@
 @php
-    $harga = '';
-    $nama = '';
-    $potongan = \App\Models\Potongan::find(request()->parent);
-    if ($potongan) {
-        $nama = $potongan->nama;
-        $harga = $potongan->harga;
+    $code = '';
+    $name = '';
+    $sql = \App\Models\ProgramStudi::find(request()->parent);
+    if ($sql) {
+        $code = $sql->code;
+        $name = $sql->name;
     }
 
 @endphp
-<form action="{{ route('potongan.store') }}" onsubmit="return false" method="post" id="form-action">
+<form action="{{ route('program-studi.store') }}" onsubmit="return false" method="post" id="form-action">
     @csrf
     <input type="hidden" name="ID" value="{{ request()->parent }}">
     <div class="modal-body">
-        <x-form-input label="Nama" type="text" name="nama" placeholder="Tulis nama potongan" :value="$nama" />
-        <x-form-input-group label="Harga" name="harga" type="number" prepend="Rp."
-            placeholder="Tulis harga potongan" :value="$harga" />
+        <x-form-input label="Kode" type="number" name="code" placeholder="Tulis kode" :value="$code" />
+        <x-form-input label="Nama" type="text" name="name" placeholder="Tulis nama" :value="$name" />
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
@@ -22,10 +21,6 @@
     </div>
 </form>
 <script>
-    $('.select-2').select2({
-        dropdownParent: $("#myModals")
-    });
-
     $("form#form-action").on("submit", function(event) {
         event.preventDefault();
         $('#page-pre-loader').show();

@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DatatableController;
+use App\Http\Controllers\DeleteController;
+use App\Http\Controllers\MataKuliahController;
+use App\Http\Controllers\ProgramStudiController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
@@ -22,8 +25,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/logout/{id}', [UserController::class, 'logoutUser'])->name('user.logout');
     });
 
-    Route::get('/datatable/{table}', [DatatableController::class, 'index'])->name('datatable');
 
+    Route::resource('mata-kuliah', MataKuliahController::class);
+
+    Route::resource('program-studi', ProgramStudiController::class);
+
+
+
+    Route::get('/datatable/{table}', [DatatableController::class, 'index'])->name('datatable');
+    Route::delete('/delete/{table}/{id}', [DeleteController::class, 'index'])->name('delete');
     Route::post('/modal/{name}', function (Request $request) {
         $segment = $request->segment(2);
         return view('modal/' . $segment);

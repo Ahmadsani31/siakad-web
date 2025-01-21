@@ -39,27 +39,27 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="./ui-alerts.html" aria-expanded="false">
+                    <a class="sidebar-link" href="{{ route('mata-kuliah.index') }}" aria-expanded="false">
                         <iconify-icon icon="solar:danger-circle-line-duotone"></iconify-icon>
-                        <span class="hide-menu">Alerts</span>
+                        <span class="hide-menu">Mata Kuliah</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="./ui-card.html" aria-expanded="false">
+                    <a class="sidebar-link" href="{{ route('program-studi.index') }}" aria-expanded="false">
                         <iconify-icon icon="solar:bookmark-square-minimalistic-line-duotone"></iconify-icon>
-                        <span class="hide-menu">Card</span>
+                        <span class="hide-menu">Program Studi</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="./ui-forms.html" aria-expanded="false">
                         <iconify-icon icon="solar:file-text-line-duotone"></iconify-icon>
-                        <span class="hide-menu">Forms</span>
+                        <span class="hide-menu">Tahun Akademik</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="./ui-typography.html" aria-expanded="false">
                         <iconify-icon icon="solar:text-field-focus-line-duotone"></iconify-icon>
-                        <span class="hide-menu">Typography</span>
+                        <span class="hide-menu">Jadwal</span>
                     </a>
                 </li>
                 <li>

@@ -14,10 +14,13 @@
             <div class="card-header d-flex align-items-center justify-content-between">
                 <h5 class="card-title fw-semibold mb-0">Data {{ $pageTitle }}</h5>
                 <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                    <button type="button" onclick="logOutSemua()" class="btn btn-sm btn-warning"><i
-                            class="fa-solid fa-right-from-bracket me-2"></i>Log out semua</button>
-                    <button type="button" class="btn btn-sm btn-primary modal-cre" id="user" parent="0"><i
-                            class="fa-solid fa-square-plus me-2"></i>
+                    <button type="button" onclick="logOutSemua()" class="btn btn-sm btn-warning d-flex align-items-center">
+                        <iconify-icon icon="solar:logout-3-bold" class="me-1" width="20"
+                            height="20"></iconify-icon>Log out semua</button>
+                    <button type="button" class="btn btn-sm btn-primary modal-cre d-flex align-items-center" id="user"
+                        parent="0">
+                        <iconify-icon icon="solar:add-square-bold" class="me-1" width="20"
+                            height="20"></iconify-icon>
                         Tambah</button>
                 </div>
             </div>

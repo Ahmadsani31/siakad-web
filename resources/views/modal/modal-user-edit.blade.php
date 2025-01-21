@@ -9,6 +9,7 @@
         $phone = $user->phone;
         $address = $user->address;
     }
+
     $rolesArr = [
         'admin' => 'Admin',
         'dosen' => 'Dosen',
@@ -28,7 +29,7 @@
         <x-form-input label="Nama" type="text" name="name" :value="$name" autofocus placeholder="Tulis nama"
             required />
         <x-form-input label="Email" type="email" name="email" :value="$email" placeholder="Tulis email"
-            readonly />
+            required />
         <x-form-input label="Nomor Telphone" type="text" name="phone" :value="$phone"
             placeholder="Tulis nomor telepon" required />
         <div class="row">
@@ -44,6 +45,7 @@
         <x-form-textarea label="Alamat" name="address" :value="$address" placeholder="Tulis alamat" required />
 
     </div>
+    <hr class="m-0" />
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary">Update</button>

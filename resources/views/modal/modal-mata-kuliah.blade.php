@@ -1,21 +1,24 @@
 @php
-    $harga = '';
-    $nama = '';
-    $sql = \App\Models\Tunjangan::find(request()->parent);
+    $code = '';
+    $name = '';
+    $sks = '';
+    $sql = \App\Models\MataKuliah::find(request()->parent);
     if ($sql) {
-        $nama = $sql->nama;
-        $harga = $sql->harga;
+        $code = $sql->code;
+        $name = $sql->name;
+        $sks = $sql->sks;
     }
 
 @endphp
-<form action="{{ route('tunjangan.store') }}" onsubmit="return false" method="post" id="form-action">
+<form action="{{ route('mata-kuliah.store') }}" onsubmit="return false" method="post" id="form-action">
     @csrf
     <input type="hidden" name="ID" value="{{ request()->parent }}">
     <div class="modal-body">
-        <x-form-input label="Nama" type="text" name="nama" placeholder="Tulis nama potongan" :value="$nama" />
-        <x-form-input-group label="Harga" name="harga" type="number" prepend="Rp."
-            placeholder="Tulis harga potongan" :value="$harga" />
+        <x-form-input label="Kode" type="text" name="code" placeholder="Tulis Kode MK" :value="$code" />
+        <x-form-input label="Nama" type="text" name="name" placeholder="Tulis Nama MK" :value="$name" />
+        <x-form-input label="SKS" type="number" name="sks" placeholder="Tulis Banyak SKS" :value="$sks" />
     </div>
+    <hr class="m-0" />
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
         <button type="submit" class="btn btn-primary">Simpan</button>
