@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\JadwalController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -18,5 +19,7 @@ Route::middleware(['auth:sanctum', 'api-midleware'])->group(function () {
     Route::prefix('v1')->group(function () {
         Route::get('user', [UserController::class, 'index']);
         Route::post('logout', [AuthController::class, 'logout']);
+
+        Route::get('jadwal', [JadwalController::class, 'index']);
     });
 });

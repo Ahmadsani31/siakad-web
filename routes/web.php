@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DatatableController;
 use App\Http\Controllers\DeleteController;
+use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\MataKuliahController;
 use App\Http\Controllers\ProgramStudiController;
 use App\Http\Controllers\TahunAkademikController;
@@ -33,6 +34,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::resource('tahun-akademik', TahunAkademikController::class);
 
+    Route::prefix('jadwal')->group(function () {
+        Route::get('/', [JadwalController::class, 'index'])->name('jadwal.index');
+        Route::post('/store', [JadwalController::class, 'store'])->name('jadwal.store');
+        Route::get('/get-mata-kuliah', [JadwalController::class, 'getMataKuliah'])->name('jadwal.get-mata-kuliah');
+        Route::get('/get-tanggal-ajar', [JadwalController::class, 'getTanggalAjar'])->name('jadwal.get-tanggal-ajar');
+    });
 
 
     Route::get('/datatable/{table}', [DatatableController::class, 'index'])->name('datatable');

@@ -14,4 +14,12 @@ class ProgramStudi extends Model
         'name',
     ];
     public $timestamps = true;
+
+    protected function casts(): array
+    {
+        return [
+            'created_at' => 'datetime:d-m-Y H:i',
+            'updated_at' => 'datetime:d-m-Y H:i',
+        ];
+    }
 }

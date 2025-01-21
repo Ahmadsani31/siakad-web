@@ -57,7 +57,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="./ui-typography.html" aria-expanded="false">
+                    <a class="sidebar-link" href="{{ route('jadwal.index') }}" aria-expanded="false">
                         <iconify-icon icon="solar:text-field-focus-line-duotone"></iconify-icon>
                         <span class="hide-menu">Jadwal</span>
                     </a>

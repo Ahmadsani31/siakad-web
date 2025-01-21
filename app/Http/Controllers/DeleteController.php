@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jadwal;
 use App\Models\MataKuliah;
 use App\Models\ProgramStudi;
 use App\Models\TahunAkademik;
@@ -35,6 +36,15 @@ class DeleteController extends Controller
                 case 'tahun-akademik':
                     try {
                         $data = TahunAkademik::findOrFail($id);
+                        $data->delete();
+                        return response()->json(['param' => true, 'message' => 'Data Berhasil Dihapus']);
+                    } catch (\Exception $err) {
+                        return response()->json(['param' => false, 'message' => $err->getMessage()]);
+                    }
+                    break;
+                case 'jadwal':
+                    try {
+                        $data = Jadwal::findOrFail($id);
                         $data->delete();
                         return response()->json(['param' => true, 'message' => 'Data Berhasil Dihapus']);
                     } catch (\Exception $err) {

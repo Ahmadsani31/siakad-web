@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\LoginRequest;
 use App\Http\Requests\Api\RegisterRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -30,10 +31,10 @@ class AuthController extends BaseController
             }
 
             $success['token'] =  $user->createToken('api-token', ['*'], now()->addMinutes(5))->plainTextToken;
-            $success['name'] =  $user->name;
+            $success['user'] = new UserResource($user);
             return $this->sendResponse($success, 'User login successfully.');
         } catch (\Throwable $err) {
-            return $this->sendError('Unauthorised.', ['error' => 'Could not create token']);
+            return $this->sendError('Unauthorised.', ['error' => $err->getMessage()]);
         }
     }
 

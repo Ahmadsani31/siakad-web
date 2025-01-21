@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jadwal;
 use App\Models\MataKuliah;
 use App\Models\ProgramStudi;
 use App\Models\TahunAkademik;
@@ -90,6 +91,36 @@ class DatatableController extends Controller
                             return $btn;
                         })
                         ->rawColumns(['action'])
+                        ->toJson();
+                    break;
+                case 'jadwal':
+                    $data = Jadwal::select('*')->orderBy('id', 'desc');
+                    return DataTables::of($data)
+                        ->addIndexColumn()
+                        ->addColumn('mata_kuliah', function ($row) {
+                            return $row->mata_kuliah->code . ' - ' . $row->mata_kuliah->name . '<br>' . $row->dosen->name;
+                        })
+                        ->addColumn('dosen', function ($row) {
+                            return $row->dosen->name;
+                        })
+                        ->addColumn('tahun_akademik', function ($row) {
+                            return $row->tahun_akademik->name . '<br/>' . $row->tahun_akademik->code;
+                        })
+                        ->addColumn('program_studi', function ($row) {
+                            return $row->program_studi->name;
+                        })
+                        ->addColumn('jam', function ($row) {
+                            return  Carbon::create($row->jam_mulai)->format('h:i') . ' - ' . Carbon::create($row->jam_selesai)->format('h:i');
+                        })
+                        ->addColumn('sks', function ($row) {
+                            return  $row->mata_kuliah->sks;
+                        })
+                        ->addColumn('action', function ($row) {
+                            $btn = '<button type="button" class="btn p-1 modal-cre text-success" id="jadwal-perkuliahan" parent="' . $row->id . '" judul="Edit Jadwal Perkuliahan"><iconify-icon icon="solar:pen-new-round-bold" width="28" height="28"></iconify-icon></button>';
+                            $btn .= '<button type="button" class="btn p-1 modal-del text-danger" tabel="jadwal" id="' . $row->id . '"><iconify-icon icon="solar:trash-bin-minimalistic-bold" width="28" height="28"></iconify-icon></button>';
+                            return $btn;
+                        })
+                        ->rawColumns(['action', 'mata_kuliah', 'tahun_akademik'])
                         ->toJson();
                     break;
                 default:

@@ -168,3 +168,19 @@ if (! function_exists('monthOptions')) {
         return $options;
     }
 }
+
+if (! function_exists('daysOptions')) {
+    function daysOptions()
+    {
+        $day = [
+            'Senin' => 'Senin',
+            'Selasa' => 'Selasa',
+            'Rabu' => 'Rabu',
+            'Kamis' => 'Kamis',
+            'Jumat' => 'Jumat',
+            'Sabtu' => 'Sabtu',
+            'Minggu' => 'Minggu',
+        ];
+        return $day;
+    }
+}
