@@ -14,16 +14,9 @@ class MataKuliahController extends Controller
      */
     public function index()
     {
+
         $pageTitle = 'Mata Kuliah';
         return view('pages.mata-kuliah.mata-kuliah-index', compact('pageTitle'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -32,42 +25,14 @@ class MataKuliahController extends Controller
     public function store(MataKuliahRequest $request)
     {
         try {
-            MataKuliah::create($request->validated());
+            if ($request->ID == 0) {
+                MataKuliah::create($request->validated());
+            } else {
+                MataKuliah::find($request->ID)->update($request->validated());
+            }
             return response()->json(['param' => true, 'message' => 'Successfully']);
         } catch (\Exception $err) {
             return response()->json(['param' => false, 'message' => $err->getMessage()]);
         }
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(MataKuliah $mataKuliah)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(MataKuliah $mataKuliah)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateMataKuliahRequest $request, MataKuliah $mataKuliah)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(MataKuliah $mataKuliah)
-    {
-        //
     }
 }

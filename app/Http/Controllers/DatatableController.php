@@ -62,9 +62,12 @@ class DatatableController extends Controller
                         ->addColumn('created_at', function ($row) {
                             return Carbon::create($row->created_at)->format('d F Y');
                         })
+                        ->editColumn('program_studi', function ($row) {
+                            return $row->program_studi->name;
+                        })
                         ->addColumn('action', function ($row) {
-                            $btn = '<button type="button" class="btn p-1 modal-cre text-success" id="user-edit" parent="' . $row->id . '" judul="Edit User"><iconify-icon icon="solar:user-plus-bold" width="28" height="28"></iconify-icon></button>';
-                            $btn .= '<button type="button" class="btn p-1 text-danger" onclick="logOutUser(' . $row->id . ')"><iconify-icon icon="solar:user-cross-rounded-bold-duotone" width="28" height="28"></iconify-icon></button>';
+                            $btn = '<button type="button" class="btn p-1 modal-cre text-success" id="mata-kuliah" parent="' . $row->id . '" judul="Edit Mata Kuliah"><iconify-icon icon="solar:pen-new-round-bold" width="28" height="28"></iconify-icon></button>';
+                            $btn .= '<button type="button" class="btn p-1 modal-del text-danger" tabel="mata-kuliah" id="' . $row->id . '"><iconify-icon icon="solar:trash-bin-minimalistic-bold" width="28" height="28"></iconify-icon></button>';
                             return $btn;
                         })
                         ->rawColumns(['action'])

@@ -14,7 +14,7 @@
             <div class="card-header d-flex align-items-center justify-content-between">
                 <h5 class="card-title fw-semibold mb-0">Data {{ $pageTitle }}</h5>
                 <button type="button" class="btn btn-sm btn-primary modal-cre d-flex align-items-center" id="mata-kuliah"
-                    parent="0">
+                    parent="0" judul="Tambah {{ $pageTitle }}">
                     <iconify-icon icon="solar:add-square-bold" class="me-1" width="20" height="20"></iconify-icon>
                     Tambah</button>
             </div>
@@ -25,6 +25,7 @@
                     <thead>
                         <tr>
                             <th width="20">No</th>
+                            <th>Program Studi</th>
                             <th>Kode</th>
                             <th>Name</th>
                             <th>SKS</th>
@@ -59,6 +60,8 @@
             ],
             columns: [{
                 data: null,
+            }, {
+                data: 'program_studi',
             }, {
                 data: 'code',
             }, {

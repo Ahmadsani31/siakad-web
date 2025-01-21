@@ -1,12 +1,16 @@
 @php
+    $prodiArr = \App\Models\ProgramStudi::all()->pluck('name', 'id');
+
     $code = '';
     $name = '';
     $sks = '';
+    $program_studi_id = '';
     $sql = \App\Models\MataKuliah::find(request()->parent);
     if ($sql) {
         $code = $sql->code;
         $name = $sql->name;
         $sks = $sql->sks;
+        $program_studi_id = $sql->program_studi_id;
     }
 
 @endphp
@@ -14,9 +18,11 @@
     @csrf
     <input type="hidden" name="ID" value="{{ request()->parent }}">
     <div class="modal-body">
+        <x-form-select label="Program Studi" class="select-2" name="program_studi_id" :options="$prodiArr" :selected="$program_studi_id"
+            placeholder="Pilih Program Studi" :required="true" />
         <x-form-input label="Kode" type="text" name="code" placeholder="Tulis Kode MK" :value="$code" />
         <x-form-input label="Nama" type="text" name="name" placeholder="Tulis Nama MK" :value="$name" />
-        <x-form-input label="SKS" type="number" name="sks" placeholder="Tulis Banyak SKS" :value="$sks" />
+        <x-form-input label="SKS" type="number" name="sks" placeholder="Tulis SKS" :value="$sks" />
     </div>
     <hr class="m-0" />
     <div class="modal-footer">

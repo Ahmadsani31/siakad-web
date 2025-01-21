@@ -22,6 +22,7 @@ class MataKuliahRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'program_studi_id' => 'required|integer|exists:program_studi,id',
             'code' => 'required|string|max:10',
             'name' => 'required|string|max:100',
             'sks' => 'required|integer',
